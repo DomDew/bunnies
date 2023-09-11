@@ -66,5 +66,17 @@ describe('router', () => {
 
       expect(res.status).toBe(200);
     });
+
+    test('should return a 200 when a route with a parameter is found', async () => {
+      const req = new Request('http://localhost:3000/bunnies/1', {
+        method: 'GET',
+      });
+
+      get('/bunnies/:id', () => new Response('Hello, world!'));
+
+      const res = await router.matchRoute(req);
+
+      expect(res.status).toBe(200);
+    });
   });
 });
