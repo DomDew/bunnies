@@ -1,10 +1,5 @@
 import db from '../db';
-
-interface Bunny {
-  name: string;
-  age: number;
-  fluffiness: number;
-}
+import { Bunny } from '../interfaces';
 
 export const createBunny = ({ name, age, fluffiness }: Bunny) => {
   db.run(

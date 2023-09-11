@@ -15,6 +15,10 @@ const get = (path: string, handler: Function) =>
   registerRoute('get', path, handler);
 const post = (path: string, handler: Function) =>
   registerRoute('post', path, handler);
+const put = (path: string, handler: Function) =>
+  registerRoute('put', path, handler);
+const deleteMethod = (path: string, handler: Function) =>
+  registerRoute('delete', path, handler);
 
 const handleRequest = async (req: Request) => {
   const { method, url } = req;
@@ -33,5 +37,8 @@ const handleRequest = async (req: Request) => {
 export default {
   get,
   post,
+  put,
+  delete: deleteMethod,
   handleRequest,
+  routes,
 };
