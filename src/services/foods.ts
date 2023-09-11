@@ -11,3 +11,7 @@ export const createFood = ({ name, calories, deliciousness }: Food) => {
 export const findFoods = () => {
   return db.query('SELECT * FROM foods;').all();
 };
+
+export const deleteFood = (id: number) => {
+  db.run('DELETE FROM foods WHERE id = $id', [id]);
+};

@@ -5,14 +5,13 @@ import registerRoutes from './src/routes';
 registerRoutes();
 
 Bun.serve({
-  async fetch(req) {
+  fetch(req) {
     logger(req);
-    try {
-      return router.handleRequest(req);
-    } catch (err) {
-      console.error(err);
-      return new Response('Server Error', { status: 500 });
-    }
+    return router.matchRoute(req);
+  },
+  error(err) {
+    console.log(err);
+    return new Response('Server Error', { status: 500 });
   },
 });
 

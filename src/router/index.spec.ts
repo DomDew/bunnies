@@ -44,13 +44,13 @@ describe('router', () => {
     });
   });
 
-  describe('handleRequest', () => {
+  describe('matchRoute', () => {
     test('should return a 404 when no route is found', async () => {
       const req = new Request('http://localhost:3000/notfound', {
         method: 'GET',
       });
 
-      const res = await router.handleRequest(req);
+      const res = await router.matchRoute(req);
 
       expect(res.status).toBe(404);
     });
@@ -62,7 +62,7 @@ describe('router', () => {
 
       get('/bunnies', () => new Response('Hello, world!'));
 
-      const res = await router.handleRequest(req);
+      const res = await router.matchRoute(req);
 
       expect(res.status).toBe(200);
     });

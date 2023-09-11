@@ -1,5 +1,5 @@
 import { Bunny } from '../interfaces';
-import { createBunny, findBunnies } from '../services/bunnies';
+import { createBunny, findBunnies, findBunny } from '../services/bunnies';
 
 export const postBunny = async (req: Request) => {
   try {
@@ -12,3 +12,13 @@ export const postBunny = async (req: Request) => {
 };
 
 export const getBunnies = () => new Response(JSON.stringify(findBunnies()));
+
+export const getBunny = (_req: Request, { id }: { id: string }) => {
+  const bunny = findBunny(Number(id));
+
+  if (!bunny) {
+    return new Response('Bunny does not exist', { status: 404 });
+  }
+
+  return new Response(JSON.stringify(findBunny(Number(id))));
+};

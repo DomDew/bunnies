@@ -7,7 +7,6 @@ export const createBunny = ({
   fluffiness,
   favoriteFoodId,
 }: Bunny) => {
-  // Insert into bunnies but throw error if favoriteFoodId doesn't exist in foods table
   const food = db
     .query('SELECT * FROM foods WHERE id = $id')
     .get({ $id: favoriteFoodId });
@@ -24,4 +23,8 @@ export const createBunny = ({
 
 export const findBunnies = () => {
   return db.query('SELECT * FROM bunnies;').all();
+};
+
+export const findBunny = (id: number) => {
+  return db.query('SELECT * FROM bunnies WHERE id = $id').get({ $id: id });
 };

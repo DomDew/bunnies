@@ -28,7 +28,6 @@ const bunnies = [
   },
 ];
 
-// Reset the database
 const reset = () => {
   console.log('Resetting the database...');
   db.run('DELETE FROM foods');

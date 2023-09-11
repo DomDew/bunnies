@@ -1,13 +1,13 @@
-import { getBunnies, postBunny } from '../controllers/bunnies';
+import { getBunnies, getBunny, postBunny } from '../controllers/bunnies';
+import { getFoods, postFood } from '../controllers/foods';
 import router from '../router';
 
 const registerRoutes = () => {
   router.get('/bunnies', getBunnies);
+  router.get('/bunnies/:id', getBunny);
   router.post('/bunnies', postBunny);
-  router.put(
-    '/bunnies',
-    () => new Response('Not implemented', { status: 501 })
-  );
+  router.get('/foods', getFoods);
+  router.post('/foods', postFood);
 };
 
 export default registerRoutes;
