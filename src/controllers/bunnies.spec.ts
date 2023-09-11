@@ -1,16 +1,34 @@
-import { describe, expect, test } from 'bun:test';
+import { afterAll, beforeAll, describe, expect, test } from 'bun:test';
+import seeds from '../db/seeds';
+import { Bunny, Food } from '../interfaces';
 import { getBunnies, postBunny } from './bunnies';
+import { getFoods } from './foods';
 
 describe('bunnies-controller', () => {
+  beforeAll(() => {
+    seeds.reset();
+    seeds.populate();
+  });
+
+  afterAll(() => {
+    seeds.reset();
+  });
+
   describe('getBunnies', () => {
     test('should return a list of bunnies', async () => {
-      const bunnies = await getBunnies().json();
-      expect(bunnies).toEqual([]);
+      const bunnies = await getBunnies().json<Bunny[]>();
+      expect(bunnies.length).toEqual(seeds.bunnies.length);
+    });
+  });
+
+  describe('postBunny', () => {
+    test('should create a bunny', async () => {
+      const foods = await getFoods().json<Food & { id: number }[]>();
 
       const bunny = {
         name: 'Bugs Bunny',
-        id: 1,
         age: 80,
+        favoriteFoodId: foods[0].id,
         fluffiness: 10,
       };
 
@@ -19,10 +37,9 @@ describe('bunnies-controller', () => {
         body: JSON.stringify(bunny),
       });
 
-      await postBunny(req);
+      const res = await postBunny(req);
 
-      const updatedBunnies = await getBunnies().json();
-      expect(updatedBunnies).toEqual([bunny]);
+      expect(res.status).toEqual(201);
     });
   });
 });

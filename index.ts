@@ -16,4 +16,4 @@ Bun.serve({
   },
 });
 
-console.log(`Listening on http://localhost:${process.env.BUN_PORT || 3000}`);
+console.log(`🐰🐇: http://localhost:${process.env.BUN_PORT || 3000}`);
