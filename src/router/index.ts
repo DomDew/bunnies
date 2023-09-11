@@ -24,7 +24,7 @@ const handleRequest = async (req: Request) => {
   const route = routes[method.toLowerCase() as Method].get(pathname);
 
   if (route) {
-    return route(req);
+    return await route(req);
   }
 
   return new Response('Not Found', { status: 404 });

@@ -1,13 +1,18 @@
 import logger from './src/logger';
 import router from './src/router';
-import registerRoutes from './src/router/routes';
+import registerRoutes from './src/routes';
 
 registerRoutes();
 
 Bun.serve({
-  fetch(req) {
+  async fetch(req) {
     logger(req);
-    return router.handleRequest(req);
+    try {
+      return router.handleRequest(req);
+    } catch (err) {
+      console.error(err);
+      return new Response('Server Error', { status: 500 });
+    }
   },
 });
 
