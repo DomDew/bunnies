@@ -1,15 +1,15 @@
 # bunnies
 
-To install dependencies:
+To run with hot reload:
 
 ```bash
-bun install
+bun dev
 ```
 
-To run:
+To run tests:
 
 ```bash
-bun run index.ts
+bun test --watch
 ```
 
 This project was created using `bun init` in bun v1.0.0. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
