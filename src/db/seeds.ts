@@ -30,8 +30,8 @@ const bunnies = [
 
 const reset = async () => {
   console.log("Resetting the database...");
-  db.run("DELETE FROM foods");
-  db.run("DELETE FROM bunnies");
+  db.run("DELETE * FROM foods");
+  db.run("DELETE * FROM bunnies");
 };
 
 const populate = async () => {
