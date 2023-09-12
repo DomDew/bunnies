@@ -50,7 +50,8 @@ describe("bunnies-controller", () => {
   describe("putBunny", () => {
     test("should update a bunny", async () => {
       const bunnies = await getBunnies().json<Bunny & { id: number }[]>();
-      const bunny = bunnies[0];
+      const foods = await getFoods().json<Food & { id: number }[]>();
+      const bunny = { ...bunnies[0], favoriteFoodId: foods[0].id };
 
       console.log(bunny);
 
