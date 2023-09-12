@@ -52,6 +52,8 @@ describe("bunnies-controller", () => {
       const bunnies = await getBunnies().json<Bunny & { id: number }[]>();
       const bunny = bunnies[0];
 
+      console.log(bunny);
+
       const req = new Request(`http://localhost:3000/bunnies/${bunny.id}`, {
         method: "PUT",
         body: JSON.stringify(bunny),
