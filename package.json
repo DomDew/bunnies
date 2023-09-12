@@ -1,15 +1,26 @@
 {
   "name": "bunnies",
-  "module": "index.ts",
+  "module": "server.ts",
   "devDependencies": {
-    "bun-types": "latest"
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
+    "bun-types": "latest",
+    "husky": "^8.0.0",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "start": "bun run index.ts",
-    "dev": "bun --watch run index.ts"
+    "start": "bun run server.ts",
+    "dev": "bun --hot run server.ts",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,html,css,json}": [
+      "bun prettier --write"
+    ]
   },
   "type": "module"
 }

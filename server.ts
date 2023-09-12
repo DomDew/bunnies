@@ -1,6 +1,6 @@
-import logger from './src/logger';
-import router from './src/router';
-import registerRoutes from './src/routes';
+import logger from "./src/logger";
+import router from "./src/router";
+import registerRoutes from "./src/routes";
 
 registerRoutes();
 
@@ -11,7 +11,7 @@ Bun.serve({
   },
   error(err) {
     console.log(err);
-    return new Response('Server Error', { status: 500 });
+    return new Response("Server Error", { status: 500 });
   },
 });
 
