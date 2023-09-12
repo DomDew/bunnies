@@ -51,7 +51,8 @@ export const putBunny = async (req: Request, { id }: { id: string }) => {
 
     updateBunnyById(Number(id), body);
     return new Response("", { status: 204 });
-  } catch {
+  } catch (err) {
+    console.error(err);
     return new Response("Food does not exist", { status: 400 });
   }
 };

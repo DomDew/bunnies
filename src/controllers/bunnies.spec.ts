@@ -47,6 +47,36 @@ describe("bunnies-controller", () => {
     });
   });
 
+  describe("putBunny", () => {
+    test("should update a bunny", async () => {
+      const bunnies = await getBunnies().json<Bunny & { id: number }[]>();
+      const bunny = bunnies[0];
+
+      const req = new Request(`http://localhost:3000/bunnies/${bunny.id}`, {
+        method: "PUT",
+        body: JSON.stringify(bunny),
+      });
+
+      const res = await putBunny(req, { id: bunny.id.toString() });
+
+      expect(res.status).toEqual(204);
+    });
+
+    test("should return a 404 if bunny does not exist", async () => {
+      const bunnies = await getBunnies().json<Bunny & { id: number }[]>();
+      const bunny = bunnies[0];
+
+      const req = new Request("http://localhost:3000/bunnies/999", {
+        method: "PUT",
+        body: JSON.stringify(bunny),
+      });
+
+      const res = await putBunny(req, { id: "999" });
+
+      expect(res.status).toEqual(404);
+    });
+  });
+
   describe("postBunny", () => {
     test("should create a bunny", async () => {
       const foods = await getFoods().json<Food & { id: number }[]>();
@@ -96,36 +126,6 @@ describe("bunnies-controller", () => {
       const res = await batchPostBunnies(req);
 
       expect(res.status).toEqual(201);
-    });
-  });
-
-  describe("putBunny", () => {
-    test("should update a bunny", async () => {
-      const bunnies = await getBunnies().json<Bunny & { id: number }[]>();
-      const bunny = bunnies[0];
-
-      const req = new Request(`http://localhost:3000/bunnies/${bunny.id}`, {
-        method: "PUT",
-        body: JSON.stringify(bunny),
-      });
-
-      const res = await putBunny(req, { id: bunny.id.toString() });
-
-      expect(res.status).toEqual(204);
-    });
-
-    test("should return a 404 if bunny does not exist", async () => {
-      const bunnies = await getBunnies().json<Bunny & { id: number }[]>();
-      const bunny = bunnies[0];
-
-      const req = new Request("http://localhost:3000/bunnies/999", {
-        method: "PUT",
-        body: JSON.stringify(bunny),
-      });
-
-      const res = await putBunny(req, { id: "999" });
-
-      expect(res.status).toEqual(404);
     });
   });
 
