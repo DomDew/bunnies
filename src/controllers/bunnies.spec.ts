@@ -12,13 +12,13 @@ import {
 import { getFoods } from "./foods";
 
 describe("bunnies-controller", () => {
-  beforeAll(() => {
-    seeds.reset();
-    seeds.populate();
+  beforeAll(async () => {
+    await seeds.reset();
+    await seeds.populate();
   });
 
-  afterAll(() => {
-    seeds.reset();
+  afterAll(async () => {
+    await seeds.reset();
   });
 
   describe("getBunnies", () => {
@@ -50,7 +50,10 @@ describe("bunnies-controller", () => {
   describe("putBunny", () => {
     test("should update a bunny", async () => {
       const bunnies = await getBunnies().json<Bunny & { id: number }[]>();
-      const bunny = bunnies[0];
+      const foods = await getFoods().json<Food & { id: number }[]>();
+      const bunny = { ...bunnies[0], favoriteFoodId: foods[0].id };
+
+      console.log(bunny);
 
       const req = new Request(`http://localhost:3000/bunnies/${bunny.id}`, {
         method: "PUT",

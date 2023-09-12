@@ -50,6 +50,8 @@ export const findBunnyById = (id: number) => {
 };
 
 export const updateBunnyById = (id: number, bunny: Bunny) => {
+  const foods = db.query("SELECT * FROM foods;").all();
+
   const food = db
     .query("SELECT * FROM foods WHERE id = $id")
     .get({ $id: bunny.favoriteFoodId });

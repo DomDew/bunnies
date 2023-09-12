@@ -10,7 +10,7 @@ Bun.serve({
     return router.matchRoute(req);
   },
   error(err) {
-    console.log(err);
+    console.error(err);
     return new Response("Server Error", { status: 500 });
   },
 });
