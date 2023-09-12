@@ -12,13 +12,13 @@ import {
 import { getFoods } from "./foods";
 
 describe("bunnies-controller", () => {
-  beforeAll(() => {
-    seeds.reset();
-    seeds.populate();
+  beforeAll(async () => {
+    await seeds.reset();
+    await seeds.populate();
   });
 
-  afterAll(() => {
-    seeds.reset();
+  afterAll(async () => {
+    await seeds.reset();
   });
 
   describe("getBunnies", () => {
