@@ -1,5 +1,6 @@
-# bunnies
+<img src="logo.png" alt="Bunny Pixelart Logo" width="50" height="auto">
 
+# bunnies
 To run with hot reload:
 
 ```bash
